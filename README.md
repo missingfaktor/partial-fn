@@ -126,10 +126,11 @@ user=> (macroexpand-1 '(partial-fn [a b] [2 :two] :qux [3 :three] :guz))
 
 ## Future directions for the library
 
-- Combinators to compose, transform partial functions.
+- Combinators to compose, transform partial functions. Examples: `or-else`, `comp`, `apply-or-else`, `lift`, `unlift`, `cond` etc.
+- Scala's `PartialFunction`s have more special treatment in compiler, making the above-mentioned combinators very efficient. We could borrow some of those ideas in this port.
 - A variant of `try`-`catch` that accepts its handler as a partial function value.
-- The [`slingshot`](https://github.com/scgilardi/slingshot) library has a concept of "selectors". These could potentially be reimplemented with the more generic concept that is partial functions.
-- The partial function implementation could potentially make use of knowledge of `core.match` internals to provide faster implementations of `:fun` and `:in-domain?`.
+- The [`slingshot`](https://github.com/scgilardi/slingshot) library has a concept of "selectors". I think "selectors" are simply a special case of "matching", and matching should belong in `core.match`. The selectors could likely be reimplemented with a bunch of custom `core.match` patterns, plus `partial-fn`.
+- The partial function implementation could potentially make use of knowledge of `core.match` innards to provide faster implementations of `:fun` and `:in-domain?`.
 
 
 ## Usage
