@@ -2,6 +2,25 @@
   (:import [clojure.lang IFn])
   (:use [clojure.core.match :only [match]]))
 
+; (partial-fn [x y z]
+;             [4 5 _] 4
+;             :else 11)
+;
+; becomes
+;
+; (fn [x y z]
+;   (match [x y z]
+;          [4 5 _] 4
+;          :else 11))
+;
+; becomes
+;
+; {:fn         (fn [x y z]
+;                (match [x y z]
+;                       [4 5 _] 4
+;                       :else 11))
+;  :in-domain? (fn [_ _ _] true)}
+
 (defmacro make-keyword-map [& syms]
   `(hash-map ~@(mapcat (fn [s] [(keyword (name s)) s]) syms)))
 
@@ -67,19 +86,3 @@
 
 (defmacro define-partial-fn [var-name & rest]
   `(def ~var-name (partial-fn ~@rest)))
-
-; (partial-fn [x y z]
-;             [4 5 _] 4
-;             :else 11)
-
-; (fn [x y z]
-;   (match [x y z]
-;          [4 5 _] 4
-;          :else 11))
-
-; {:fn         (fn [x y z]
-;                (match [x y z]
-;                       [4 5 _] 4
-;                       :else 11))
-;  :in-domain? (fn [_ _ _] true)}
-
