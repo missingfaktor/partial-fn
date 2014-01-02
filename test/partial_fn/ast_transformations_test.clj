@@ -34,32 +34,32 @@
                                 :args-vec  '[x y]
                                 :matchers  [[[3 :a] :yes]
                                             [[4 :b] :umm-maybe]]
-                                :else-part :no}) => {:node-type                    :in-domain?-fn
-                                                     :args-vec                     '[x y]
+                                :else-part :no}) => {:node-type      :in-domain?-fn
+                                                     :args-vec       '[x y]
                                                      :explicit-cases [[3 :a] [4 :b]]
-                                                     :has-else?                    true}
+                                                     :has-else?      true}
        (create-in-domain?-node {:node-type :match-fn
                                 :args-vec  '[x y]
                                 :matchers  [[[3 :a] :yes]
                                             [[4 :b] :umm-maybe]]
-                                :else-part nil}) => {:node-type                    :in-domain?-fn
-                                                     :args-vec                     '[x y]
+                                :else-part nil}) => {:node-type      :in-domain?-fn
+                                                     :args-vec       '[x y]
                                                      :explicit-cases [[3 :a] [4 :b]]
-                                                     :has-else?                    false})
+                                                     :has-else?      false})
 
 (facts "about `in-domain?-node->block`"
-       (in-domain?-node->block {:node-type                    :in-domain?-fn
-                                :args-vec                     '[x y]
+       (in-domain?-node->block {:node-type      :in-domain?-fn
+                                :args-vec       '[x y]
                                 :explicit-cases [[3 :a] [4 :b]]
-                                :has-else?                    true}) => '(clojure.core/fn [x y] true)
-       (in-domain?-node->block {:node-type                    :in-domain?-fn
-                                :args-vec                     '[x y]
+                                :has-else?      true}) => '(clojure.core/fn [x y] true)
+       (in-domain?-node->block {:node-type      :in-domain?-fn
+                                :args-vec       '[x y]
                                 :explicit-cases [[3 :a] [4 :b]]
-                                :has-else?                    false}) => '(clojure.core/fn [x y]
-                                                                            (clojure.core.match/match [x y]
-                                                                                                      [3 :a] true
-                                                                                                      [4 :b] true
-                                                                                                      :else false)))
+                                :has-else?      false}) => '(clojure.core/fn [x y]
+                                                              (clojure.core.match/match [x y]
+                                                                                        [3 :a] true
+                                                                                        [4 :b] true
+                                                                                        :else false)))
 
 (fact "about `match-fn-block->in-domain?-block`"
       (match-fn-block->in-domain?-block '(fn [x y]
