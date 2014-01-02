@@ -1,9 +1,12 @@
 (ns partial-fn.core-test
-  (:use [clojure.test])
-  (:require [partial-fn [core :as pfn-core]]))
+  (:use [clojure.test]
+        [partial-fn.core]
+        [midje.sweet]))
 
-(deftest a-test
-  (testing "FIXME, I DON'T fail."
-    (is (= 0 0))))
+(fact "make-keyword-map creates a keyword map"
+      (let [x 3
+            y 4
+            z :zeta]
+        (make-keyword-map x y z)) => {:x 3 :y 4 :z :zeta})
 
 ; (use '[clojure.core.match :only (match)]) (use 'partial-fn.core)

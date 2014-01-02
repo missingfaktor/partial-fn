@@ -2,6 +2,9 @@
   (:import [clojure.lang IFn])
   (:use [clojure.core.match :only [match]]))
 
+(defmacro make-keyword-map [& syms]
+  `(hash-map ~@(mapcat (fn [s] [(keyword (name s)) s]) syms)))
+
 (defn create-in-domain?-node [match-fn-node]
   (let [cases-supported (map first (:matchers match-fn-node))
         has-else? (boolean (:else match-fn-node))]
