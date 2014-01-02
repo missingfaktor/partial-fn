@@ -36,7 +36,7 @@
                                             [[4 :b] :umm-maybe]]
                                 :else-part :no}) => {:node-type                    :in-domain?-fn
                                                      :args-vec                     '[x y]
-                                                     :cases-with-specific-matchers [[3 :a] [4 :b]]
+                                                     :explicit-cases [[3 :a] [4 :b]]
                                                      :has-else?                    true}
        (create-in-domain?-node {:node-type :match-fn
                                 :args-vec  '[x y]
@@ -44,17 +44,17 @@
                                             [[4 :b] :umm-maybe]]
                                 :else-part nil}) => {:node-type                    :in-domain?-fn
                                                      :args-vec                     '[x y]
-                                                     :cases-with-specific-matchers [[3 :a] [4 :b]]
+                                                     :explicit-cases [[3 :a] [4 :b]]
                                                      :has-else?                    false})
 
 (facts "about `in-domain?-node->block`"
        (in-domain?-node->block {:node-type                    :in-domain?-fn
                                 :args-vec                     '[x y]
-                                :cases-with-specific-matchers [[3 :a] [4 :b]]
+                                :explicit-cases [[3 :a] [4 :b]]
                                 :has-else?                    true}) => '(clojure.core/fn [x y] true)
        (in-domain?-node->block {:node-type                    :in-domain?-fn
                                 :args-vec                     '[x y]
-                                :cases-with-specific-matchers [[3 :a] [4 :b]]
+                                :explicit-cases [[3 :a] [4 :b]]
                                 :has-else?                    false}) => '(clojure.core/fn [x y]
                                                                             (clojure.core.match/match [x y]
                                                                                                       [3 :a] true

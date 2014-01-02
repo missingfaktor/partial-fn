@@ -16,11 +16,11 @@
           (make-keyword-map args-vec matchers else-part))))
 
 (defn create-in-domain?-node [match-fn-node]
-  (let [cases-with-specific-matchers (map first (:matchers match-fn-node))
+  (let [explicit-cases (map first (:matchers match-fn-node))
         has-else? (boolean (:else-part match-fn-node))
         args-vec (:args-vec match-fn-node)]
     (into {:node-type :in-domain?-fn}
-          (make-keyword-map cases-with-specific-matchers has-else? args-vec))))
+          (make-keyword-map explicit-cases has-else? args-vec))))
 
 (defn in-domain?-node->block [node]
   (let [syms-vec (:args-vec node)]
@@ -28,7 +28,7 @@
       `(fn ~syms-vec true)
       `(fn ~syms-vec
          (match ~syms-vec
-                ~@(reduce concat (map vector (:cases-with-specific-matchers node) (repeat true)))
+                ~@(reduce concat (map vector (:explicit-cases node) (repeat true)))
                 :else false)))))
 
 (defn match-fn-block->in-domain?-block [match-fn-block]
