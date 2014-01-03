@@ -19,8 +19,8 @@
   (applyTo [this args]
     (apply (:fun this) args)))
 
-(defn in-domain? [pfn & args]
-  (apply (:in-domain? pfn) args))
+(defn in-domain? [pfun & args]
+  (apply (:in-domain? pfun) args))
 
 (defmacro partial-fn [args-vec & code]
   (let [match-fn-block `(fn ~args-vec
