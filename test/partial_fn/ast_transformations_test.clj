@@ -61,12 +61,12 @@
                                                                                         [4 :b] true
                                                                                         :else false)))
 
-(fact "about `match-fn-block->in-domain?-block`"
-      (match-fn-block->in-domain?-block '(fn [x y]
-                                           (match [x y]
-                                                  [3 :a] :yes
-                                                  [4 :b] :umm-maybe))) => '(clojure.core/fn [x y]
-                                                                             (clojure.core.match/match [x y]
-                                                                                                       [3 :a] true
-                                                                                                       [4 :b] true
-                                                                                                       :else false)))
+(facts "about `match-fn-block->in-domain?-block`"
+       (match-fn-block->in-domain?-block '(fn [x y]
+                                            (match [x y]
+                                                   [3 :a] :yes
+                                                   [4 :b] :umm-maybe))) => '(clojure.core/fn [x y]
+                                                                              (clojure.core.match/match [x y]
+                                                                                                        [3 :a] true
+                                                                                                        [4 :b] true
+                                                                                                        :else false)))
