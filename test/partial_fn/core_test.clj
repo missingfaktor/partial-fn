@@ -25,4 +25,8 @@
                           :else :ko) =expands-to=> (def foo
                                                      (partial-fn.core/partial-fn [a]
                                                                                  [:a] :ok
-                                                                                 :else :ko)))
+                                                                                  :else :ko)))
+
+(facts "about `empty-partial-fn`"
+       (empty-partial-fn 4 5 6) => (throws RuntimeException)
+       (in-domain? empty-partial-fn 4 5 6) => false)

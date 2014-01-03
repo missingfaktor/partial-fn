@@ -30,3 +30,8 @@
 
 (defmacro define-partial-fn [var-name & rest]
   `(def ~var-name (partial-fn ~@rest)))
+
+(def empty-partial-fn
+  (map->PartialFunction {:fun        (fn [& args]
+                                       (throw (RuntimeException. "Empty partial function.")))
+                         :in-domain? (constantly false)}))
