@@ -23,3 +23,7 @@
 (facts "about `fallback-to-nil`"
        (sample-pfun-4 1 2) => "world"
        (sample-pfun-4 1 3) => nil)
+
+(facts "about `invoke-with-fallback-fn`"
+       (invoke-with-fallback-fn sample-pfun-2 + 1 2) => "world"
+       (invoke-with-fallback-fn sample-pfun-2 + 1 3) => 4)

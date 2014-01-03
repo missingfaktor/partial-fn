@@ -13,3 +13,9 @@
     (if (apply in-domain? pfun args)
       (apply pfun args)
       nil)))
+
+(defn invoke-with-fallback-fn [pfun fallback-fn & args]
+  (let [fn-to-invoke (if (apply in-domain? pfun args)
+                       pfun
+                       fallback-fn)]
+    (apply fn-to-invoke args)))
